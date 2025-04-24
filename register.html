@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro - Textisur</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+    <header>
+        <h1 class="logo">Textisur</h1>
+    </header>
+
+    <main class="auth-container">
+        <h2>Crea tu cuenta</h2>
+        <form>
+            <label>Nombre completo:</label>
+            <input type="text" required />
+
+            <label>Correo electrónico:</label>
+            <input type="email" required />
+
+            <label>Contraseña:</label>
+            <input type="password" required />
+
+            <label>Tipo de usuario:</label>
+            <select>
+                <option>Comprador</option>
+                <option>Vendedor</option>
+            </select>
+
+            <button class="btn-primary">Registrarse</button>
+            <p>¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+        </form>
+    </main>
+</body>
+</html>
