@@ -1,3 +1,38 @@
+<?php
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['ajax'])) {
+    if (!isset($_SESSION['usuario'])) {
+        echo json_encode(['error' => 'Debes iniciar sesión para ver tu carrito.']);
+        exit();
+    }
+
+    $carrito = $_SESSION['carrito'] ?? [];
+    echo json_encode($carrito);
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_SESSION['usuario'])) {
+        echo json_encode(['error' => 'Debes iniciar sesión para agregar al carrito.']);
+        exit();
+    }
+
+    $productoId = $_POST['productoId'] ?? null;
+    if ($productoId) {
+        if (!isset($_SESSION['carrito'])) {
+            $_SESSION['carrito'] = [];
+        }
+        if (!in_array($productoId, $_SESSION['carrito'])) {
+            $_SESSION['carrito'][] = $productoId;
+        }
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['error' => 'ID de producto no válido.']);
+    }
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
