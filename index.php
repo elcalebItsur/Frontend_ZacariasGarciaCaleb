@@ -1,3 +1,7 @@
+<?php
+session_start();
+$usuario = $_SESSION['usuario'] ?? null;
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,23 +16,33 @@
         <h1 class="logo">Textisur</h1>
         <nav>
         <ul>
-            <li><a href="index.html">Inicio</a></li>
+            <li><a href="index.php">Inicio</a></li>
             <li><a href="favorites.html">Favoritos</a></li>
             <li><a href="cart.html">Carrito</a></li>
             <li><a href="about.html">Vende con Nosotros</a></li>
-            <li><a href="login.html">Iniciar Sesión</a></li>
+            <?php if ($usuario): ?>
+                <li><span>Bienvenido, <?php echo htmlspecialchars($usuario); ?>!</span></li>
+                <li><a href="logout.php">Cerrar sesión</a></li>
+            <?php else: ?>
+                <li><a href="login.html">Iniciar Sesión</a></li>
+            <?php endif; ?>
         </ul>
         </nav>
     </header> 
-
     <main>
+        <?php if ($usuario): ?>
+            <section class="bienvenida">
+                <h2>¡Bienvenido, <?php echo htmlspecialchars($usuario); ?>!</h2>
+                <p>Gracias por iniciar sesión en Textisur.</p>
+            </section>
+        <?php endif; ?>
         <!-- Hero Principal -->
         <section class="hero">
         <h2>Descubre tu estilo.</h2>
         <p>Las últimas tendencias en un solo lugar.</p>
         <a href="#populares" class="btn-primary">Ver Populares</a>
         </section>
-
+        
         <!-- Categorías -->
         <section class="categorias">
         <h2>Categorías</h2>
@@ -97,7 +111,6 @@
         <a href="about.html" class="btn-primary">Comienza Ahora</a>
         </section>
     </main>
-
     <footer>
         <p>&copy; 2025 TEXTISUR. Todos los derechos reservados.</p>
     </footer>
